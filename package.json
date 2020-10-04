@@ -1,0 +1,13 @@
+{
+  "name": "orinoco",
+  "version": "1.0.0",
+  "description": "projet P5 orinoco",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch main.scss:style.css",
+    "prefix": "postcss style.css --use autoprefixer prefixed"
+  },
+  "author": "Jessica Fournier",
+  "license": "ISC"
+}
