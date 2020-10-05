@@ -1,8 +1,8 @@
-
-var request = new XMLHttpRequest();
+let responses;
+let request = new XMLHttpRequest();
 request.onreadystatechange = function(){
     if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-        var responses = JSON.parse(this.responseText);
+        responses = JSON.parse(this.responseText);
         console.log(responses);
     }
     for (let response of responses){
@@ -31,3 +31,4 @@ request.onreadystatechange = function(){
 request.open("GET", "http://localhost:3000/api/teddies/");
 request.send();
 
+console.log(responses);

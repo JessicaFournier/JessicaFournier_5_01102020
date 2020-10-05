@@ -49,4 +49,40 @@ header, footer {
   border-radius: 5px;
 }
 
+/* CSS de la partie panier*/
+.panier-detail {
+  background-color: #F3E9F1;
+  border-radius: solid 2px #797478;
+  border-radius: 5px;
+}
+.panier-detail .teddy-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+/* CSS de la partie formulaire */
+.formulaire {
+  display: grid;
+  grid-template-columns: 100px 100px;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: left;
+}
+.formulaire .formulaire-input {
+  width: 200px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.formulaire .formulaire-command {
+  border: solid 2px #8F5BFC;
+  border-radius: 20px;
+  background-color: #8F5BFC;
+  color: #fff;
+  width: 130px;
+  margin-bottom: 20px;
+  text-align: center;
+  margin-left: 35px;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -46,6 +46,7 @@ request.onreadystatechange = function(){
     //création du choix de la couleur
 
     let color = document.createElement('select');
+    color.id = "color-select";
 
     let optionColor = document.createElement('option');
     optionColor.innerText = 'Choisir une option';
@@ -60,6 +61,9 @@ request.onreadystatechange = function(){
 
     newElement.append(color);
 
+
+    
+
     //création du prix
 
     let price = document.createElement('p');
@@ -71,6 +75,28 @@ request.onreadystatechange = function(){
     button.innerText = 'Ajouter au panier';
     button.classList.add('ours-button');
     newElement.appendChild(button);
+
+    //ajout de l'événement choix de la couleur
+
+    let colorChoice;
+    document.getElementById('color-select').addEventListener('change', function() {
+       colorChoice = this.value;
+       console.log(colorChoice);
+    }, false);
+
+    // ajout de l'événement sur le bouton
+    button.addEventListener('click', event => {
+        let contenuPanier = {
+            id : responses._id,
+            name : responses.name,
+            price : responses.price,
+            color : colorChoice,
+            img : responses.imageUrl
+        };
+        console.log(contenuPanier);
+        localStorage.setItem('panier', JSON.stringify(contenuPanier));
+    });
 };
 request.open("GET", "http://localhost:3000/api/teddies/" + id);
 request.send();
+

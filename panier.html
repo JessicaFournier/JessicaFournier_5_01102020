@@ -24,7 +24,7 @@
                     <div id="navbarContent" class="collapse navbar-collapse">
                         <ul class="navbar-nav  ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="index.hmtl">Accueil</a>
+                                <a class="nav-link" href="index.html">Accueil</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="panier.html"><i class="fas fa-shopping-cart"></i>Panier</a>
@@ -38,8 +38,24 @@
 
 
     <!-- Section centrale -->
-    <div class="col-md-4 col-12 text-center ours-product" id="ours-section">
+    <h1 class="col-12 text-center">Contenu de votre panier</h1>
+    <div class=" col-12 text-center" id="panier-section"></div>
 
+    <div class="col-12 text-center" id="formulaire-section">
+        <h2>Contact pour la commande</h2>
+        <form class="formulaire" method="post">
+            <label class="formulaire-input" for="nom">Nom : </label>
+            <input class="formulaire-input" type="text" name="nom" id="nom" required>
+            <label class="formulaire-input" for="prenom">Prénom : </label>
+            <input class="formulaire-input" type="text" name="prenom" id="prenom" required>
+            <label class="formulaire-input" for="email">Email : </label>
+            <input class="formulaire-input" type="email" required>
+            <label class="formulaire-input" for="adresse">Adresse : </label>
+            <input class="formulaire-input" type="text" name="adresse" id="adresse" required>
+            <label class="formulaire-input" for="ville">ville : </label>
+            <input class="formulaire-input" type="text" name="ville" required>
+            <input class="formulaire-command" type="submit" value="Commander">
+        </form>
     </div>
 
     <footer>
