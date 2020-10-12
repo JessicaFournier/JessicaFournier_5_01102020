@@ -38,29 +38,46 @@
 
 
     <!-- Section centrale -->
-    <h1 class="col-12 text-center">Contenu de votre panier</h1>
-    <div class=" col-12 text-center" id="panier-section"></div>
+    <h1 class="col-12 text-center contenu-title">Contenu de votre panier</h1>
+    <div class=" col-12 text-center" id="contenu-panier">
+        <div class=" col-12 text-center" id="panier-section">
+            <div class="panier-recap" id="panier-produit"><span class="panier-title">Produit</span></div>
+            <div class="panier-recap" id="panier-option"><span class="panier-title">Option</span></div>
+            <div class="panier-recap" id="panier-prix"><span class="panier-title">Prix</span></div>
+            <div class="panier-recap" id="panier-bouton"><span class="panier-title"></span></div>
+        </div>
+    </div>
 
     <div class="col-12 text-center" id="formulaire-section">
-        <h2>Contact pour la commande</h2>
-        <form class="formulaire" method="post">
+        <h2 class="formulaire-title">Contact pour la commande</h2>
+        <form class="formulaire" method="post" name="formContact">
             <label class="formulaire-input" for="nom">Nom : </label>
             <input class="formulaire-input" type="text" name="nom" id="nom" required>
+            <span class="formulaire-input"  id="missNom"></span>
+
             <label class="formulaire-input" for="prenom">Prénom : </label>
             <input class="formulaire-input" type="text" name="prenom" id="prenom" required>
+            <span class="formulaire-input" id="missPrenom"></span>
+
             <label class="formulaire-input" for="email">Email : </label>
-            <input class="formulaire-input" type="email" required>
+            <input class="formulaire-input" type="email" id="email" required>
+            <span class="formulaire-input"  id="missEmail"></span>
+
             <label class="formulaire-input" for="adresse">Adresse : </label>
             <input class="formulaire-input" type="text" name="adresse" id="adresse" required>
+            <span class="formulaire-input"  id="missAdresse"></span>
+
             <label class="formulaire-input" for="ville">ville : </label>
-            <input class="formulaire-input" type="text" name="ville" required>
-            <input class="formulaire-command" type="submit" value="Commander">
+            <input class="formulaire-input" type="text" name="ville" id="ville" required>
+            <span class="formulaire-input" id="missVille"></span>
+
+            <input id="bouton-commander" class="formulaire-command" type="submit" value="Commander" onclick="document.location.href='confirmation.html'">
         </form>
     </div>
 
     <footer>
         <div class="container">
-            <div class="row">
+            <div class="row footer-item">
                 <a href="">Conditions générales de ventes</a>
                 <a href="mailto:contact@orinoco.fr">Contact</a>
             </div>
