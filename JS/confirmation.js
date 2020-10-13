@@ -1,17 +1,30 @@
-fetch('http://localhost:3000/api/teddies/order')
-        .then(res => res.json())
-        .then(console.log(res))
+
+let totalPrice = localStorage.getItem("totalPriceConfirmation");
+console.log(totalPrice);
+let order = JSON.parse(localStorage.getItem("order"));
+console.log(order);
+console.log(order.orderId);
+
 
 
 //création du contenu de la page
-
-
 
 let newElement = document.createElement('p');
 let element = document.getElementById('confirmation-section');
 
 newElement.classList.add('confirmation-detail');
 newElement.classList.add('text-center');
-newElement.innerText = 'Nous vous remercions de votre commande n°' +  + '. Le montant de votre commande s\'élève à ' + + '.';
+newElement.innerText = 'Nous vous remercions de votre commande n° ' + order.orderId + '. Le montant de votre commande s\'élève à ' + totalPrice.toLocaleString('fr-FR') + ' €.';
 element.appendChild(newElement);
 
+let button = document.createElement('a');
+button.innerText = 'Revenir à la page d\'accueil';
+button.classList.add('home-button');
+button.setAttribute("href", "index.html");
+newElement.appendChild(button);
+
+button.addEventListener('click',clearLocalStorage)
+
+function clearLocalStorage(){
+    localStorage.clear();
+}

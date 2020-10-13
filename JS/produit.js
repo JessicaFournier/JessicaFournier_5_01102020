@@ -62,7 +62,7 @@ function fetchOneProduct(id) {
             img : responses.imageUrl
         };
 
-        // essais pour ajout au panier
+        //ajout au panier
         let panier  = localStorage.getItem('panier');
         panier = JSON.parse(panier);
 
@@ -101,7 +101,7 @@ function teddyRecap (responses, newElement) {
     //création du prix
 
     let price = document.createElement('p');
-    price.innerText = 'Prix : ' +  responses.price + '€';
+    price.innerText = 'Prix : ' +  responses.price.toLocaleString('fr-FR') + '€';
     newElement.appendChild(price);
 }
 

@@ -43,7 +43,7 @@ function displayOneProduct(product){
     newElement.appendChild(h2);
 
     let p = document.createElement("p");
-    p.innerText = "Prix : " +  product.price + "€";
+    p.innerText = "Prix : " +  product.price.toLocaleString('fr-FR') + "€";
     newElement.appendChild(p);
 }
 

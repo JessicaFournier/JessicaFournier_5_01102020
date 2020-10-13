@@ -69,7 +69,7 @@ for (let i=0; i<panier.length; i++){
         newElementOption.remove();
         newElementTeddy.remove();
         newElementButton.remove();
-        totalPrice (panier);
+
     }
 }
 
@@ -155,9 +155,14 @@ function validation(event){
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(objetPost)
+        }).then(function(response){
+            return response.json();
+        }).then(function(data){
+            console.log(data);
+            localStorage.setItem("order", JSON.stringify(data));
         })
 
-        localStorage.clear();
+        window.location.href = './confirmation.html';
     }
 }
 
@@ -186,6 +191,8 @@ function totalPrice(panier){
     elementTotalPrice.appendChild(newElementTotalPrice);
 
     newElementTotalPrice.innerText = 'Le montant total de la commande est : ' + totalPrice.toLocaleString('fr-FR') + '€.';
+
+    localStorage.setItem("totalPriceConfirmation", totalPrice);
 }
 
 
