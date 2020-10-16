@@ -1,4 +1,4 @@
-
+//récupération des infos du localStorage
 let totalPrice = localStorage.getItem("totalPriceConfirmation");
 console.log(totalPrice);
 let order = JSON.parse(localStorage.getItem("order"));

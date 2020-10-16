@@ -8,16 +8,18 @@ const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get('id');
 console.log(id);
 
-fetchOneProduct(id);
+// récupération des données et affichage
 
-//requête des infos sur les ours et création de la page
-function fetchOneProduct(id) {
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = function(){
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            var responses = JSON.parse(this.responseText);
-            console.log(responses);
-        }
+fetch('http://localhost:3000/api/teddies/' + id, {
+    method: 'GET',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+}).then(function(response){
+    return response.json();
+}).then(function(data){
+    console.log(data);
 
     let newElement = document.createElement('div');
     let element = document.getElementById('ours-section');
@@ -26,11 +28,11 @@ function fetchOneProduct(id) {
     newElement.classList.add('text-center');
     element.appendChild(newElement);
 
-    teddyRecap(responses, newElement);
+    teddyRecap(data, newElement);
 
     //création du choix de la couleur
 
-    colorSelect(responses.colors, newElement);
+    colorSelect(data.colors, newElement);
 
     
     //création du bouton panier
@@ -41,7 +43,7 @@ function fetchOneProduct(id) {
 
     //ajout de l'événement choix de la couleur
 
-    let colorChoice;
+    let colorChoice = data.colors[0];
     document.getElementById('color-select').addEventListener('change', function() {
        colorChoice = this.value;
        console.log(colorChoice);
@@ -55,11 +57,11 @@ function fetchOneProduct(id) {
         }
 
         let contenuProduit = {
-            id : responses._id,
-            name : responses.name,
-            price : responses.price,
+            id : data._id,
+            name : data.name,
+            price : data.price,
             color : colorChoice,
-            img : responses.imageUrl
+            img : data.imageUrl
         };
 
         //ajout au panier
@@ -70,10 +72,10 @@ function fetchOneProduct(id) {
         
         localStorage.setItem('panier', JSON.stringify(panier));
     });
-};
-request.open("GET", "http://localhost:3000/api/teddies/" + id);
-request.send();
-}
+
+}).catch(err => {
+    console.log("err", err);
+});
 
 //////////////////////////////////////////////////////////////Fonctions utilisées//////////////////////////////////////////////////////////////////
 

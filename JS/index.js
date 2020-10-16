@@ -1,29 +1,23 @@
+fetch('http://localhost:3000/api/teddies', {
+    method: 'GET',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+}).then(function(response){
+    return response.json();
+}).then(function(data){
+    console.log(data);
 
-fetchProducts('teddies');
+    for (let product of data){
+        displayOneProduct(product);
+    }
 
+}).catch(err => {
+    console.log("err", err);
+});
 
-//fonction qui va récupérer les infos des produits dans l'API
-
-function fetchProducts(type){
-    let request = new XMLHttpRequest();
-    request.onreadystatechange = function(){
-        let products = [];
-        
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            products = JSON.parse(this.responseText);
-            console.log(products);
-        }
-
-        for (let product of products){
-            displayOneProduct(product);
-        }
-    };
-    request.open("GET", "http://localhost:3000/api/" + type);
-    request.send();
-}
-
-// fonction qui crée les blocs des différents produits appelés
-
+//Fonction qui crée les bloc HTML
 function displayOneProduct(product){
     let newElement = document.createElement('a');
     let element = document.getElementById('ours-section');
@@ -45,8 +39,4 @@ function displayOneProduct(product){
     let p = document.createElement("p");
     p.innerText = "Prix : " +  product.price.toLocaleString('fr-FR') + "€";
     newElement.appendChild(p);
-}
-
-function onChangeCategories(categorie){
-    fetchProducts(categorie);
 }
