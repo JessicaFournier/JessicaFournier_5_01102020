@@ -2,9 +2,24 @@
 let panier = JSON.parse(localStorage.getItem('panier'));
 console.log(panier);
 
-//création du contenu de la page
-
+//création et affichage du panier
 for (let i=0; i<panier.length; i++){
+    createLignePanier(panier[i]);
+};
+
+//affichage du prix total
+totalPrice (panier);
+
+//Validation du formulaire
+let listeId = ['nom', 'prenom', 'email','adresse', 'ville'];
+let formValid = document.getElementById('bouton-commander');
+    
+formValid.addEventListener('click', validation);
+
+///////////////////////////////////////////////////////Fonctions utilisées/////////////////////////////////////////////////
+
+//fonction de création du contenu de la page
+function createLignePanier(index){
     let newElementTeddy = document.createElement('div');
     let elementTeddy = document.getElementById('panier-produit');
 
@@ -15,16 +30,17 @@ for (let i=0; i<panier.length; i++){
 
     //création du contenu du produit panier
     let teddyName = document.createElement('p');
-    console.log(panier[i].name);
-    teddyName.innerText = panier[i].name;
+    console.log(index.name);
+    teddyName.innerText = index.name;
     newElementTeddy.appendChild(teddyName);
 
     let teddyImg = document.createElement('img');
-    teddyImg.src = panier[i].img;
+    teddyImg.src = index.img;
     teddyImg.classList.add('teddy-img');
     newElementTeddy.appendChild(teddyImg);
 
-    // création du contenu option du panier
+    //Ajoute l'option de couleur choisie
+
     let newElementOption = document.createElement('div');
     let elementOption = document.getElementById('panier-option');
     elementOption.appendChild(newElementOption);
@@ -32,11 +48,12 @@ for (let i=0; i<panier.length; i++){
     newElementOption.classList.add('panier-color');
 
     let teddyColor = document.createElement('p');
-    teddyColor.innerText = panier[i].color;
+    teddyColor.innerText = index.color ? index.color : 'Aucune opotion';
+    
     newElementOption.appendChild(teddyColor);
-    console.log(panier[i].color);
+    console.log(index);
 
-    //création du prix du panier
+    //Ajoute le prix
 
     let newElementPrice = document.createElement('div');
     let elementPrice = document.getElementById('panier-prix');
@@ -45,11 +62,11 @@ for (let i=0; i<panier.length; i++){
     newElementPrice.classList.add('panier-price');
 
     let price = document.createElement('p');
-    price.innerText = panier[i].price.toLocaleString('fr-FR') + ' €';
+    price.innerText = index.price.toLocaleString('fr-FR') + ' €';
     newElementPrice.appendChild(price);
 
+    //Ajoute le bouton supprimer
 
-    //création du bouton supprimer
     let newElementButton = document.createElement('div');
     let elementButton = document.getElementById('panier-bouton');
     elementButton.appendChild(newElementButton);
@@ -62,28 +79,49 @@ for (let i=0; i<panier.length; i++){
     button.value = 'Supprimer'
     newElementButton.appendChild(button);
 
-    button.addEventListener('click',deleteLigne);
-
     function deleteLigne() {
+        console.log(index);
+        
+        let panier = JSON.parse(localStorage.getItem('panier'));
+        panier.splice(index,1);
+        localStorage.setItem('panier', JSON.stringify(panier));
+        
         newElementPrice.remove();
         newElementOption.remove();
         newElementTeddy.remove();
         newElementButton.remove();
 
+        totalPrice(panier);
     }
+
+    button.addEventListener('click',deleteLigne);
 }
 
-//affichage du prix total
-totalPrice (panier);
+//fonction qui met la première lettre en majuscule
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
-//Validation du formulaire
-let listeId = ['nom', 'prenom', 'email','adresse', 'ville'];
-let formValid = document.getElementById('bouton-commander');
+// fonction qui calcule le prix total et l'insère dans la page
+function totalPrice(panier){
     
-formValid.addEventListener('click', validation);
+    let totalPrice = 0;
+    for (let i=0; i<panier.length; i++) {
+        totalPrice = totalPrice + panier[i].price;
+        console.log(totalPrice.toLocaleString('fr-FR'));
+    }
 
-function validation(event){
+    let elementTotalPrice = document.getElementById('contenu-total-price');
+
+    elementTotalPrice.innerText = 'Le montant total de la commande est : ' + totalPrice.toLocaleString('fr-FR') + '€.';
+
+    localStorage.setItem("totalPriceConfirmation", totalPrice);
+}
+
+//fonction de validation du formulaire et envoie à l'API
+
+function  validation(event){
     event.preventDefault();
     let allValid = true;
     for (i=0; i < listeId.length; i++) {
@@ -160,39 +198,11 @@ function validation(event){
         }).then(function(data){
             console.log(data);
             localStorage.setItem("order", JSON.stringify(data));
+            window.location.href = './confirmation.html';
+        }).catch(err => {
+            console.log("err", err);
         })
 
-        window.location.href = './confirmation.html';
     }
 }
-
-///////////////////////////////////////////////////////Fonctions utilisées/////////////////////////////////////////////////
-
-//fonction qui met la première lettre en majuscule
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-// fonction qui calcule le prix total et l'insère dans la page
-function totalPrice(panier){
-    
-    let totalPrice = 0;
-    for (let i=0; i<panier.length; i++) {
-        totalPrice = totalPrice + panier[i].price;
-        console.log(totalPrice.toLocaleString('fr-FR'));
-    }
-
-    let newElementTotalPrice = document.createElement('div');
-    let elementTotalPrice = document.getElementById('contenu-panier');
-
-    newElementTotalPrice.classList.add('panier-totalPrice');
-    newElementTotalPrice.classList.add('text-center');
-    elementTotalPrice.appendChild(newElementTotalPrice);
-
-    newElementTotalPrice.innerText = 'Le montant total de la commande est : ' + totalPrice.toLocaleString('fr-FR') + '€.';
-
-    localStorage.setItem("totalPriceConfirmation", totalPrice);
-}
-
 
