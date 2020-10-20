@@ -119,6 +119,11 @@ header, footer {
   background-color: #F3E9F1;
   border: solid 2px #797478;
   border-radius: 5px;
+  padding-bottom: 20px;
+}
+#panier-section p {
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
 #panier-section .teddy-img {
   width: 100px;
