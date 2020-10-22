@@ -15,6 +15,7 @@ fetch('http://localhost:3000/api/teddies', {
 
 }).catch(err => {
     console.log("err", err);
+    alert("Serveur non disponible");
 });
 
 //Fonction qui crée les bloc HTML

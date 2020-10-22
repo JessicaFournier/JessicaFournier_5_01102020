@@ -201,6 +201,7 @@ function  validation(event){
             window.location.href = './confirmation.html';
         }).catch(err => {
             console.log("err", err);
+            alert("Serveur non disponible");
         })
 
     }
