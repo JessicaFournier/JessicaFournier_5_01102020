@@ -1,12 +1,10 @@
 //récupération de l'id de la page
 
 const queryString = window.location.search;
-console.log(queryString);
 
 const urlParams = new URLSearchParams(queryString);
 
 const id = urlParams.get('id');
-console.log(id);
 
 // récupération des données et affichage
 
@@ -19,8 +17,7 @@ fetch('http://localhost:3000/api/teddies/' + id, {
 }).then(function(response){
     return response.json();
 }).then(function(data){
-    console.log(data);
-
+    
     let newElement = document.createElement('div');
     let element = document.getElementById('ours-section');
 
@@ -46,7 +43,6 @@ fetch('http://localhost:3000/api/teddies/' + id, {
     let colorChoice = data.colors[0];
     document.getElementById('color-select').addEventListener('change', function() {
        colorChoice = this.value;
-       console.log(colorChoice);
     }, false);
 
     // ajout de l'événement sur le bouton

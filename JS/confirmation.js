@@ -1,10 +1,7 @@
 //récupération des infos du localStorage
 let totalPrice = localStorage.getItem("totalPriceConfirmation");
-console.log(totalPrice);
-let order = JSON.parse(localStorage.getItem("order"));
-console.log(order);
-console.log(order.orderId);
 
+let order = JSON.parse(localStorage.getItem("order"));
 
 
 //création du contenu de la page

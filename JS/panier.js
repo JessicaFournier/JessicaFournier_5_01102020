@@ -1,6 +1,5 @@
 //Récupération des données du localStorage
 let panier = JSON.parse(localStorage.getItem('panier'));
-console.log(panier);
 
 //création et affichage du panier
 for (let i=0; i<panier.length; i++){
@@ -27,10 +26,8 @@ function createLignePanier(index){
     newElementTeddy.classList.add('text-center');
     elementTeddy.appendChild(newElementTeddy);
 
-
     //création du contenu du produit panier
     let teddyName = document.createElement('p');
-    console.log(index.name);
     teddyName.innerText = index.name;
     newElementTeddy.appendChild(teddyName);
 
@@ -51,7 +48,6 @@ function createLignePanier(index){
     teddyColor.innerText = index.color ? index.color : 'Aucune opotion';
     
     newElementOption.appendChild(teddyColor);
-    console.log(index);
 
     //Ajoute le prix
 
@@ -80,7 +76,6 @@ function createLignePanier(index){
     newElementButton.appendChild(button);
 
     function deleteLigne() {
-        console.log(index);
         
         let panier = JSON.parse(localStorage.getItem('panier'));
         panier.splice(index,1);
@@ -109,7 +104,6 @@ function totalPrice(panier){
     let totalPrice = 0;
     for (let i=0; i<panier.length; i++) {
         totalPrice = totalPrice + panier[i].price;
-        console.log(totalPrice.toLocaleString('fr-FR'));
     }
 
     let elementTotalPrice = document.getElementById('contenu-total-price');
@@ -156,8 +150,6 @@ function  validation(event){
             missVerif.style.color = 'red';
             allValid = false;
         };
-
-        
     }
 
     if (allValid == true) {
@@ -170,21 +162,15 @@ function  validation(event){
             city : document.getElementById(listeId[4]).value, 
         }
 
-        console.log(contactForm);
-
         let produitPost = [];
         for (let i=0;i<panier.length; i++){
             produitPost.push(panier[i].id)
         }
 
-        console.log(produitPost);
-
         let objetPost = {
             contact : contactForm,
             products : produitPost
         }
-
-        console.log(objetPost);
 
         fetch('http://localhost:3000/api/teddies/order', {
             method: 'POST',
@@ -196,14 +182,12 @@ function  validation(event){
         }).then(function(response){
             return response.json();
         }).then(function(data){
-            console.log(data);
             localStorage.setItem("order", JSON.stringify(data));
             window.location.href = './confirmation.html';
         }).catch(err => {
             console.log("err", err);
             alert("Serveur non disponible");
         })
-
     }
 }
 
