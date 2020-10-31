@@ -4,37 +4,38 @@ fetch('http://localhost:3000/api/teddies', {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     },
-}).then(function(response){
+}).then(function(response) {
     return response.json();
 }).then(function(data){
-    for (let product of data){
+    for (let product of data) {
         displayOneProduct(product);
     }
 }).catch(err => {
-    console.log("err", err);
-    alert("Serveur non disponible");
+    console.log('err', err);
+    alert('Serveur non disponible');
 });
 
 //Fonction qui crée les bloc HTML
-function displayOneProduct(product){
+
+function displayOneProduct(product) {
     let newElement = document.createElement('a');
     let element = document.getElementById('ours-section');
 
-    newElement.classList.add("ours-details");
-    newElement.classList.add("text-center");
-    newElement.setAttribute("href", "produit.html?id=" + product._id);
+    newElement.classList.add('ours-details');
+    newElement.classList.add('text-center');
+    newElement.setAttribute('href', 'produit.html?id=' + product._id);
     element.appendChild(newElement);
 
     let img = document.createElement('img');
     img.src = product.imageUrl;
-    img.classList.add("ours-img");
+    img.classList.add('ours-img');
     newElement.appendChild(img);
 
-    let h2 = document.createElement("h2");
+    let h2 = document.createElement('h2');
     h2.innerText = product.name;
     newElement.appendChild(h2);
 
-    let p = document.createElement("p");
-    p.innerText = "Prix : " +  product.price.toLocaleString('fr-FR') + "€";
+    let p = document.createElement('p');
+    p.innerText = 'Prix : ' +  product.price.toLocaleString('fr-FR') + '€';
     newElement.appendChild(p);
 }

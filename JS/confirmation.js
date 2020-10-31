@@ -1,8 +1,8 @@
 //récupération des infos du localStorage
+
 let totalPrice = localStorage.getItem("totalPriceConfirmation");
 
 let order = JSON.parse(localStorage.getItem("order"));
-
 
 //création du contenu de la page
 
@@ -17,11 +17,11 @@ element.appendChild(newElement);
 let button = document.createElement('a');
 button.innerText = 'Revenir à la page d\'accueil';
 button.classList.add('home-button');
-button.setAttribute("href", "index.html");
+button.setAttribute('href', 'index.html');
 newElement.appendChild(button);
 
-button.addEventListener('click',clearLocalStorage)
+button.addEventListener('click', clearLocalStorage)
 
-function clearLocalStorage(){
+function clearLocalStorage() {
     localStorage.clear();
 }

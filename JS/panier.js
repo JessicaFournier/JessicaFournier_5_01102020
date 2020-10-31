@@ -1,15 +1,19 @@
 //Récupération des données du localStorage
+
 let panier = JSON.parse(localStorage.getItem('panier'));
 
 //création et affichage du panier
-for (let i=0; i<panier.length; i++){
+
+for (let i=0; i<panier.length; i++) {
     createLignePanier(panier[i]);
 };
 
 //affichage du prix total
+
 totalPrice (panier);
 
 //Validation du formulaire
+
 let listeId = ['nom', 'prenom', 'email','adresse', 'ville'];
 let formValid = document.getElementById('bouton-commander');
     
@@ -18,7 +22,8 @@ formValid.addEventListener('click', validation);
 ///////////////////////////////////////////////////////Fonctions utilisées/////////////////////////////////////////////////
 
 //fonction de création du contenu de la page
-function createLignePanier(index){
+
+function createLignePanier(index) {
     let newElementTeddy = document.createElement('div');
     let elementTeddy = document.getElementById('panier-produit');
 
@@ -27,6 +32,7 @@ function createLignePanier(index){
     elementTeddy.appendChild(newElementTeddy);
 
     //création du contenu du produit panier
+
     let teddyName = document.createElement('p');
     teddyName.innerText = index.name;
     newElementTeddy.appendChild(teddyName);
@@ -45,7 +51,7 @@ function createLignePanier(index){
     newElementOption.classList.add('panier-color');
 
     let teddyColor = document.createElement('p');
-    teddyColor.innerText = index.color ? index.color : 'Aucune opotion';
+    teddyColor.innerText = index.color ? index.color : 'Aucune option';
     
     newElementOption.appendChild(teddyColor);
 
@@ -99,7 +105,8 @@ function capitalizeFirstLetter(string) {
 }
 
 // fonction qui calcule le prix total et l'insère dans la page
-function totalPrice(panier){
+
+function totalPrice(panier) {
     
     let totalPrice = 0;
     for (let i=0; i<panier.length; i++) {
@@ -115,7 +122,7 @@ function totalPrice(panier){
 
 //fonction de validation du formulaire et envoie à l'API
 
-function  validation(event){
+function  validation(event) {
     event.preventDefault();
     let allValid = true;
     for (i=0; i < listeId.length; i++) {
@@ -126,25 +133,27 @@ function  validation(event){
         let adressValid = /^([0-9]+)+[\s][a-zA-Zéèîï][a-zéèêàçîï]+([-'\s][a-zA-Zéèîï][a-zéèêàçîï]+)?$/;
         let mailValid = /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
         
-
         //si le champs est vide
+
         if(verif.validity.valueMissing){
             event.preventDefault();
             missVerif.textContent = 'Champ manquant';
             missVerif.style.color = 'red';
             allValid = false;
-        // si le format de données n'est pas correct    
-        } else if ((listeId[i] == 'nom' || listeId[i] == 'prenom' || listeId[i] == 'ville') && nameValid.test(verif.value) == false){
+
+        // si le format de données n'est pas correct 
+
+        } else if ((listeId[i] == 'nom' || listeId[i] == 'prenom' || listeId[i] == 'ville') && nameValid.test(verif.value) == false) {
             event.preventDefault();
             missVerif.textContent = 'Format incorrect';
             missVerif.style.color = 'red';
             allValid = false;
-        } else if (listeId[i] == 'adresse' && adressValid.test(verif.value) == false){
+        } else if (listeId[i] == 'adresse' && adressValid.test(verif.value) == false) {
             event.preventDefault();
             missVerif.textContent = 'Format incorrect';
             missVerif.style.color = 'red';
             allValid = false;
-        } else if (listeId[i] == 'email' && mailValid.test(verif.value) == false){
+        } else if (listeId[i] == 'email' && mailValid.test(verif.value) == false) {
             event.preventDefault();
             missVerif.textContent = 'Format incorrect';
             missVerif.style.color = 'red';
@@ -163,7 +172,7 @@ function  validation(event){
         }
 
         let produitPost = [];
-        for (let i=0;i<panier.length; i++){
+        for (let i=0;i<panier.length; i++) {
             produitPost.push(panier[i].id)
         }
 
@@ -179,13 +188,13 @@ function  validation(event){
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(objetPost)
-        }).then(function(response){
+        }).then(function(response) {
             return response.json();
-        }).then(function(data){
-            localStorage.setItem("order", JSON.stringify(data));
+        }).then(function(data) {
+            localStorage.setItem('order', JSON.stringify(data));
             window.location.href = './confirmation.html';
         }).catch(err => {
-            console.log("err", err);
+            console.log('err', err);
             alert("Serveur non disponible");
         })
     }

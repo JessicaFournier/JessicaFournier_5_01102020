@@ -14,9 +14,9 @@ fetch('http://localhost:3000/api/teddies/' + id, {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     },
-}).then(function(response){
+}).then(function(response) {
     return response.json();
-}).then(function(data){
+}).then(function(data) {
     
     let newElement = document.createElement('div');
     let element = document.getElementById('ours-section');
@@ -31,8 +31,8 @@ fetch('http://localhost:3000/api/teddies/' + id, {
 
     colorSelect(data.colors, newElement);
 
-    
     //création du bouton panier
+
     let button = document.createElement('button');
     button.innerText = 'Ajouter au panier';
     button.classList.add('ours-button');
@@ -46,7 +46,8 @@ fetch('http://localhost:3000/api/teddies/' + id, {
     }, false);
 
     // ajout de l'événement sur le bouton
-    button.addEventListener('click', event => {
+
+    button.addEventListener('click', function(event) {
 
         if (localStorage.getItem('panier') == null) {
             localStorage.setItem('panier', JSON.stringify([]));
@@ -70,14 +71,16 @@ fetch('http://localhost:3000/api/teddies/' + id, {
     });
 
 }).catch(err => {
-    console.log("err", err);
+    console.log('err', err);
     alert("Serveur non disponible");
 });
 
 //////////////////////////////////////////////////////////////Fonctions utilisées//////////////////////////////////////////////////////////////////
 
 // fontion qui crée le produit (titre, description, image, prix)
+
 function teddyRecap (responses, newElement) {
+
     //création du titre
 
     let title = document.createElement('h1');
@@ -108,7 +111,7 @@ function teddyRecap (responses, newElement) {
 
 function colorSelect (colors, newElement) {
     let color = document.createElement('select');
-    color.id = "color-select";
+    color.id = 'color-select';
 
     let optionColor = document.createElement('option');
     optionColor.innerText = 'Choisir une option';
