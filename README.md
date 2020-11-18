@@ -7,3 +7,6 @@ Compétences développées :
   - Gérer des événements JavaScript
   - Créer un plan de test pour une application
   - Interagir avec un web service avec JavaScript
+
+
+Lien vers le backend à installer : https://github.com/OpenClassrooms-Student-Center/JWDP5
